@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Question;
 use App\SolvedQuestionStat;
 use App\UserLevel;
+use App\Meme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -67,7 +68,7 @@ class GameController extends Controller
             $solved_question->time_taken = $time_taken;
             $solved_question->save();
 
-            $meme_url = 'https://media.makeameme.org/created/yes-correct-5b3d51.jpg';
+            $meme_url = Meme::where('class', 'correct')->get()->random()->url;
             return ['url' => $meme_url, 'answer' => 'correct'];
         }
         else {
@@ -76,7 +77,7 @@ class GameController extends Controller
             $solved_question->attempts = $attempts + 1;
             $solved_question->save();
 
-            $meme_url = 'https://i.imgflip.com/1dxet4.jpg';
+            $meme_url = Meme::where('class', 'wrong')->get()->random()->url;
             return ['url' => $meme_url, 'answer' => 'wrong'];
         }
     }
