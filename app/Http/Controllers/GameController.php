@@ -7,6 +7,7 @@ use App\SolvedQuestionStat;
 use App\UserLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 
 class GameController extends Controller
@@ -44,10 +45,47 @@ class GameController extends Controller
     }
 
     function validateAnswer(Request $request) {
+        $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
+        $correct_answer = Question::findOrFail($level)->answer;
+        $correct_answer = Str::upper($correct_answer);
 
+        $given_answer = $request->get('answer');
+        $given_answer = Str::upper($given_answer);
+
+        if($correct_answer == $given_answer) {
+            UserLevel::where('username', Auth::user()->username)->update(array('current_level'=> $level + 1));
+            UserLevel::where('username', Auth::user()->username)->update(array('question_revealed'=> 0));
+
+            $solved_question = SolvedQuestionStat::whereUsernameAndQuestionNo(Auth::user()->username, $level)->first();
+            $attempts = $solved_question->attempts;
+            $solved_question->attempts = $attempts + 1;
+
+            $start_time = $solved_question->start_time;
+            $finish_time = now();
+            $time_taken = $finish_time->diff($start_time)->format('%H:%I:%S');
+            $solved_question->finish_time = $finish_time;
+            $solved_question->time_taken = $time_taken;
+            $solved_question->save();
+
+            $meme_url = 'https://media.makeameme.org/created/yes-correct-5b3d51.jpg';
+            return ['url' => $meme_url, 'answer' => 'correct'];
+        }
+        else {
+            $solved_question = SolvedQuestionStat::whereUsernameAndQuestionNo(Auth::user()->username, $level)->first();
+            $attempts = $solved_question->attempts;
+            $solved_question->attempts = $attempts + 1;
+            $solved_question->save();
+
+            $meme_url = 'https://i.imgflip.com/1dxet4.jpg';
+            return ['url' => $meme_url, 'answer' => 'wrong'];
+        }
     }
 
     function proxymeter(Request $request) {
-
+        // if coin != 0
+        // implement proxymeter
+        // coins - 10
+        // attempts + 1
+        echo 'work in progress';
     }
 }
