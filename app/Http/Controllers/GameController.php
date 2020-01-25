@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
+use Illuminate\Support\Facades\DB;
+
 
 class GameController extends Controller
 {
@@ -68,6 +70,8 @@ class GameController extends Controller
             $solved_question->time_taken = $time_taken;
             $solved_question->save();
 
+            UserLevel::where('username', Auth::user()->username)->update(array('last_update_time' => $finish_time));
+
             $meme_url = Meme::where('class', 'correct')->get()->random()->url;
             return ['url' => $meme_url, 'answer' => 'correct'];
         }
@@ -88,5 +92,10 @@ class GameController extends Controller
         // coins - 10
         // attempts + 1
         echo 'work in progress';
+    }
+
+    function leaderboard() {
+        $entry = DB::table('user_levels')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+        return view('leaderboard', ['entry' => $entry]);
     }
 }

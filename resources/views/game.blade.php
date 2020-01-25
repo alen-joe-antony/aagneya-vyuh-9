@@ -14,6 +14,7 @@
   </style>
  </head>
  <body>
+    <a href="{{ url('/game/leaderboard') }}">leaderboard</a>
   <br />
   <div class="container box">
    <h3 align="center">Simple Login System in Laravel</h3><br />

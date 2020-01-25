@@ -19,3 +19,6 @@ Route::get('/login/logout', 'LoginController@logout');
 Route::get('/game', 'GameController@index');
 Route::get('/game/question', 'GameController@getQuestion');
 Route::post('/game/submitAnswer', 'GameController@submitAnswer');
+
+Route::get('/game/leaderboard', 'GameController@leaderboard');
+
