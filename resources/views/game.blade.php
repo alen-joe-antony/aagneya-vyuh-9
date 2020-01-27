@@ -61,6 +61,9 @@
    @else
    <a href="{{ url('/game/question') }}">Reveal Question</a>
    @endif
+   @isset($proximity)
+   <h4>PROXIMITY : {{ $proximity ?? '' }}</h4>
+   @endisset
   </div>
  </body>
 </html>

@@ -8,6 +8,7 @@ use App\UserLevel;
 use App\Meme;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\DB;
@@ -15,11 +16,14 @@ use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
-    function index() {
+    function index($mode = 0) {
         $question_revealed = UserLevel::findOrFail(Auth::user()->username)->question_revealed;
         if ($question_revealed == 1) {
             $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;
             $img_url = Question::findOrFail($current_level)->question_img_url;
+            if($mode) {
+                return $img_url;
+            }
             return view('game')->with('q_img_url', $img_url);
         } else {
             return view('game');
@@ -43,7 +47,10 @@ class GameController extends Controller
             $data = GameController::validateAnswer($request);
             return view('game')->with('data', $data);
         } else if (isset($_POST['proxymeter'])) {
-            GameController::proxymeter($request);
+            $proximity = GameController::proxymeter($request);
+            // Handle errors here
+            $img_url = GameController::index($mode = 1);
+            return view('game')->with('q_img_url', $img_url)->with('proximity', $proximity);
         }
     }
 
@@ -88,10 +95,23 @@ class GameController extends Controller
 
     function proxymeter(Request $request) {
         // if coin != 0
-        // implement proxymeter
         // coins - 10
-        // attempts + 1
-        echo 'work in progress';
+        $answer = $request->get('answer');
+        if($answer == NULL) {
+            // EDIT HERE
+            return 'ERROR';
+        }
+
+        $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
+        $samples = Config::get('proxymeter.levels.'.$level);
+        $proximity = array_search($answer, $samples);
+
+        $solved_question = SolvedQuestionStat::whereUsernameAndQuestionNo(Auth::user()->username, $level)->first();
+        $attempts = $solved_question->attempts;
+        $solved_question->attempts = $attempts + 1;
+        $solved_question->save();
+
+        return $proximity;
     }
 
     function leaderboard() {
