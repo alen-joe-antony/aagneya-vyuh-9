@@ -100,6 +100,7 @@ class GameController extends Controller
         ]);
 
         $answer = $request->get('answer');
+        $answer = Str::upper($answer);
 
         $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
         $samples = Config::get('proxymeter.levels.'.$level);
