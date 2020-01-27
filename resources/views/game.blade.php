@@ -33,6 +33,16 @@
    @if (@isset($q_img_url))
    <img src="{{ $q_img_url }}" width="512" />
 
+   @if (count($errors) > 0)
+   <div class="alert alert-danger">
+    <ul>
+    @foreach($errors->all() as $error)
+     <li>{{ $error }}</li>
+    @endforeach
+    </ul>
+   </div>
+  @endif
+
    <form method="post" action="{{ url('/game/submitAnswer') }}">
     {{ csrf_field() }}
     <div class="form-group">

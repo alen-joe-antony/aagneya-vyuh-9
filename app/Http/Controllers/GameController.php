@@ -48,7 +48,6 @@ class GameController extends Controller
             return view('game')->with('data', $data);
         } else if (isset($_POST['proxymeter'])) {
             $proximity = GameController::proxymeter($request);
-            // Handle errors here
             $img_url = GameController::index($mode = 1);
             return view('game')->with('q_img_url', $img_url)->with('proximity', $proximity);
         }
@@ -96,11 +95,11 @@ class GameController extends Controller
     function proxymeter(Request $request) {
         // if coin != 0
         // coins - 10
+        $this->validate($request, [
+            'answer'   => 'required|regex:/^[\w\\s]+$/',
+        ]);
+
         $answer = $request->get('answer');
-        if($answer == NULL) {
-            // EDIT HERE
-            return 'ERROR';
-        }
 
         $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
         $samples = Config::get('proxymeter.levels.'.$level);
