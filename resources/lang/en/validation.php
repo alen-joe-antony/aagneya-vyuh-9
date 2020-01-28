@@ -130,8 +130,8 @@ return [
     */
 
     'custom' => [
-        'attribute-name' => [
-            'rule-name' => 'custom-message',
+        'answer' => [
+            'regex' => 'The answer may only contain letters, numbers and spaces',
         ],
     ],
 
