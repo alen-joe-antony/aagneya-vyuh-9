@@ -54,6 +54,11 @@ class GameController extends Controller
     }
 
     function validateAnswer(Request $request) {
+
+        $this->validate($request, [
+            'answer'   => 'required|regex:/^[\w\\s]+$/',
+        ]);
+
         $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
         $correct_answer = Question::findOrFail($level)->answer;
         $correct_answer = Str::upper($correct_answer);
