@@ -15,6 +15,29 @@
  </head>
  <body>
     <a href="{{ url('/game/leaderboard') }}">leaderboard</a>
+
+    <h3 id='coins_val'></h3>
+    <script>
+        $(document).ready(function() {
+            var url = "{{URL('game')}}";
+            var txt = 'Coins: ';
+            $.ajax({
+                url: "/game/coins",
+                type: "POST",
+                data:{
+                    _token:'{{ csrf_token() }}'
+                },
+                cache: false,
+                dataType: 'json',
+                success: function(dataResult){
+                    txt += dataResult;
+                    coins_val.innerText = txt;
+                }
+            });
+        });
+    </script>
+
+
   <br />
   <div class="container box">
    <h3 align="center">Simple Login System in Laravel</h3><br />
@@ -71,8 +94,11 @@
    @else
    <a href="{{ url('/game/question') }}">Reveal Question</a>
    @endif
-   @isset($proximity)
-   <h4>PROXIMITY : {{ $proximity ?? '' }}</h4>
+   @isset($proximity['proximity'])
+   <h4>PROXIMITY : {{ $proximity['proximity'] ?? '' }}</h4>
+   @endisset
+   @isset($proximity['proximity_error'])
+   <h4>ERROR : Out of Coins</h4>
    @endisset
   </div>
  </body>

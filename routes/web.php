@@ -22,3 +22,6 @@ Route::post('/game/submitAnswer', 'GameController@submitAnswer');
 
 Route::get('/game/leaderboard', 'GameController@leaderboard');
 
+Route::post('/game/coins', 'GameController@getCoins');
+
+
