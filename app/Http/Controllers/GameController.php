@@ -83,6 +83,9 @@ class GameController extends Controller
 
             UserLevel::where('username', Auth::user()->username)->update(array('last_update_time' => $finish_time));
 
+            $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
+            UserLevel::where('username', Auth::user()->username)->update(array('coins' => $coins + 25));
+
             $meme_url = Meme::where('class', 'correct')->get()->random()->url;
             return ['url' => $meme_url, 'answer' => 'correct'];
         }
@@ -98,29 +101,41 @@ class GameController extends Controller
     }
 
     function proxymeter(Request $request) {
-        // if coin != 0
-        // coins - 10
-        $this->validate($request, [
-            'answer'   => 'required|regex:/^[\w\\s]+$/',
-        ]);
+        $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
 
-        $answer = $request->get('answer');
-        $answer = Str::upper($answer);
+        if($coins != 0) {
+            $this->validate($request, [
+                'answer'   => 'required|regex:/^[\w\\s]+$/',
+            ]);
 
-        $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
-        $samples = Config::get('proxymeter.levels.'.$level);
-        $proximity = array_search($answer, $samples);
+            $answer = $request->get('answer');
+            $answer = Str::upper($answer);
 
-        $solved_question = SolvedQuestionStat::whereUsernameAndQuestionNo(Auth::user()->username, $level)->first();
-        $attempts = $solved_question->attempts;
-        $solved_question->attempts = $attempts + 1;
-        $solved_question->save();
+            $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
+            $samples = Config::get('proxymeter.levels.'.$level);
+            $proximity = array_search($answer, $samples);
 
-        return $proximity;
+            $solved_question = SolvedQuestionStat::whereUsernameAndQuestionNo(Auth::user()->username, $level)->first();
+            $attempts = $solved_question->attempts;
+            $solved_question->attempts = $attempts + 1;
+            $solved_question->save();
+
+            UserLevel::where('username', Auth::user()->username)->update(array('coins' => $coins - 10));
+
+            return ['proximity' => $proximity];
+        }
+        else {
+            return ['proximity_error' => 'ERROR : Out of coins'];
+        }
     }
 
     function leaderboard() {
         $entry = DB::table('user_levels')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
         return view('leaderboard', ['entry' => $entry]);
     }
+
+    function getCoins() {
+        $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
+        return $coins;
+      }
 }
