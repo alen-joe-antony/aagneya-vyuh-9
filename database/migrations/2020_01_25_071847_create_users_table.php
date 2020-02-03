@@ -17,7 +17,12 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('username')->primary();
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('provider');
+            $table->string('provider_id');
+            $table->string('profile_pic_url');
+            $table->boolean('home_participant')->default(0);
+            $table->string('institution');
+            $table->string('user_type')->default('player');
             $table->rememberToken();
             $table->timestamps();
         });
