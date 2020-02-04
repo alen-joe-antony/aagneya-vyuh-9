@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use App\UserLevel;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SocialLoginController extends Controller
@@ -25,8 +26,11 @@ class SocialLoginController extends Controller
       $getInfo = Socialite::driver($provider)->user();
       $user = $this->createUser($getInfo,$provider);
       auth()->login($user);
+      if($user->username == Null) // or $user->home_participant == Null or $user->institution == Null
+      {
+          return view('register')->with('provider', $provider)->with('id', $getInfo->id);
+      }
       return redirect('game');
-
     }
 
     function createUser($getInfo,$provider)
@@ -37,19 +41,27 @@ class SocialLoginController extends Controller
             File::put(public_path() . '/images/profile-pics/' . $getInfo->getId() . ".jpg", $profile_pic);
             $user = User::create([
                 'name'              => $getInfo->name,
-                'username'          => preg_replace('/\s+/', '', $getInfo->name),
                 'email'             => $getInfo->email,
                 'provider'          => $provider,
                 'provider_id'       => $getInfo->id,
                 'profile_pic_url'   => 'images/profile-pics/' . $getInfo->getId() . ".jpg",
-                'institution'       => 'GECB', // Change later
-            ]);
-
-            UserLevel::create([
-                'username'      => preg_replace('/\s+/', '', $getInfo->name),
             ]);
         }
         return $user;
+    }
+
+    function registerUser(Request $request) {
+        $user = User::where('provider_id', $request->id)->first();
+        $user->update([
+            'username'          => $request->username,
+            'home_participant'  => $request->home_participant,
+            'institution'       => $request->institution
+        ]);
+        // $user->save();
+        UserLevel::create([
+            'username'          => $request->username
+        ]);
+        return redirect('game');
     }
 
     function logout()

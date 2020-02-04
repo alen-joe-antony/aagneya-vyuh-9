@@ -14,16 +14,18 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
+            $table->bigIncrements('id');
             $table->string('name');
-            $table->string('username')->primary();
+            $table->string('username')->nullable()->unique();
+            // Possibility of having fb without email
             $table->string('email')->unique();
             $table->string('provider');
             $table->string('provider_id');
             $table->string('profile_pic_url');
-            $table->boolean('home_participant')->default(0);
-            $table->string('institution');
+            $table->boolean('home_participant')->nullable();
+            $table->string('institution')->nullable();
             $table->string('user_type')->default('player');
-            $table->rememberToken();
+            $table->string('status')->default('active');
             $table->timestamps();
         });
     }
