@@ -8,6 +8,7 @@ use App\User;
 use App\UserLevel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class SocialLoginController extends Controller
 {
@@ -51,13 +52,21 @@ class SocialLoginController extends Controller
     }
 
     function registerUser(Request $request) {
+        $v = Validator::make($request->all(), [
+            'username'      => 'unique:users|required|min:3|regex:/^[\w\\s]+$/',
+            'institution'   => 'required|regex:/^[\w\\s]+$/'
+        ]);
+
+        if ($v->fails())
+        {
+            return view('register')->withErrors($v->errors())->with('provider', $request->provider)->with('id', $request->id);
+        }
         $user = User::where('provider_id', $request->id)->first();
         $user->update([
             'username'          => $request->username,
             'home_participant'  => $request->home_participant,
             'institution'       => $request->institution
         ]);
-        // $user->save();
         UserLevel::create([
             'username'          => $request->username
         ]);

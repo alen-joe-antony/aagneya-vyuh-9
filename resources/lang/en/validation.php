@@ -133,6 +133,12 @@ return [
         'answer' => [
             'regex' => 'The answer may only contain letters, numbers and spaces',
         ],
+        'username' => [
+            'regex' => 'The username may only contain letters, numbers and spaces',
+        ],
+        'institution' => [
+            'regex' => 'The institution name may only contain letters, numbers and spaces',
+        ],
     ],
 
     /*

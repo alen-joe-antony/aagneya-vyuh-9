@@ -27,6 +27,16 @@
     </head>
     <body>
         <div class="container box">
+            <br />
+            @if (count($errors) > 0)
+            <div class="alert alert-danger">
+             <ul>
+             @foreach($errors->all() as $error)
+              <li>{{ $error }}</li>
+             @endforeach
+             </ul>
+            </div>
+           @endif
             <br>
             <form name="registration_form" method="post" action="{{ url('/auth/register') }}">
                 {{ csrf_field() }}
