@@ -11,10 +11,15 @@
 |
 */
 
-Route::get('/', 'LoginController@index');
-Route::get('/login', 'LoginController@index');
-Route::post('/login/checkLogin', 'LoginController@checkLogin');
-Route::get('/login/logout', 'LoginController@logout');
+use Illuminate\Support\Facades\Route;
+
+Route::get('/', 'SocialLoginController@index');
+Route::get('/login', 'SocialLoginController@index');
+Route::get('/auth/redirect/{provider}', 'SocialLoginController@auth_redirect');
+Route::get('/auth/callback/{provider}', 'SocialLoginController@auth_callback');
+Route::post('/auth/register', 'SocialLoginController@registerUser');
+Route::get('/auth/logout', 'SocialLoginController@logout');
+
 
 Route::get('/game', 'GameController@index');
 Route::get('/game/question', 'GameController@getQuestion');

@@ -15,44 +15,11 @@
  </head>
  <body>
   <br />
-  <div class="container box">
-   <h3 align="center">Simple Login System in Laravel</h3><br />
+<div class="form-group row mb-0">
+ <div class="col-md-8 offset-md-4">
+    <a href="{{ url('/auth/redirect/facebook') }}" class="btn btn-primary"><i class="fa fa-facebook"></i> Facebook</a>
+</div>
+</div>
 
-   @if(isset(Auth::user()->email))
-    <script>window.location="/game";</script>
-   @endif
-
-   @if ($message = Session::get('error'))
-   <div class="alert alert-danger alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>{{ $message }}</strong>
-   </div>
-   @endif
-
-   @if (count($errors) > 0)
-    <div class="alert alert-danger">
-     <ul>
-     @foreach($errors->all() as $error)
-      <li>{{ $error }}</li>
-     @endforeach
-     </ul>
-    </div>
-   @endif
-
-   <form method="post" action="{{ url('/login/checkLogin') }}">
-    {{ csrf_field() }}
-    <div class="form-group">
-     <label>Enter Email</label>
-     <input type="email" name="email" class="form-control" />
-    </div>
-    <div class="form-group">
-     <label>Enter Password</label>
-     <input type="password" name="password" class="form-control" />
-    </div>
-    <div class="form-group">
-     <input type="submit" name="login" class="btn btn-primary" value="Login" />
-    </div>
-   </form>
-  </div>
  </body>
 </html>

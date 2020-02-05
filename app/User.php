@@ -11,24 +11,6 @@ class User extends Authenticatable
     use Notifiable;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'username', 'email', 'password',
-    ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
-
-    /**
      * The table associated with the model.
      *
      * @var string
@@ -36,25 +18,9 @@ class User extends Authenticatable
     protected $table = 'users';
 
     /**
-     * The primary key associated with the table.
+     * The attributes that aren't mass assignable.
      *
-     * @var string
+     * @var array
      */
-    protected $primaryKey = 'username';
-
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
-     * The "type" of the auto-incrementing ID.
-     *
-     * @var string
-     */
-    protected $keyType = 'string';
-
-
+    protected $guarded = [];
 }

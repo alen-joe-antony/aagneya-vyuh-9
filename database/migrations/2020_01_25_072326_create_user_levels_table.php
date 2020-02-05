@@ -17,7 +17,8 @@ class CreateUserLevelsTable extends Migration
             $table->string('username')->primary();
             $table->integer('current_level')->default(1);
             $table->boolean('question_revealed')->default(false);
-            $table->integer('total_score')->default(0);
+            $table->integer('coins')->default(100);
+            $table->timestamp('last_update_time')->nullable();
             $table->foreign('username')->references('username')->on('users');
             $table->foreign('current_level')->references('question_no')->on('questions');
         });
