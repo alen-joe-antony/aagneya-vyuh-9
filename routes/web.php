@@ -29,3 +29,4 @@ Route::get('/game/leaderboard', 'GameController@leaderboard');
 Route::post('/game/coins', 'GameController@getCoins');
 
 Route::get('/admin', 'AdminController@index');
+Route::get('/admin/view/profile/{username}', 'AdminController@viewProfile');

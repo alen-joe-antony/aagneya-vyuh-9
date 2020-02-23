@@ -8,7 +8,7 @@
     <body>
         <h1>ADMIN PAGE</h1>
         <br>
-        <a href="{{ url('/admin/control/coins_giveaway/all') }}" class="btn btn-warning btn-lg" role="button">Giveaway Coins to all Users</a>
+        <a href="{{ url('/admin/action/coins_giveaway/all') }}" class="btn btn-warning btn-lg" role="button">Giveaway Coins to all Users</a>
         <a href="{{ url('/admin/view/logs') }}" class="btn btn-primary btn-lg" role="button">View Logs</a>
         <br>
         <br>
@@ -33,7 +33,7 @@
               <td>{{$data->current_level - 1}}</td>
               <td>{{$data->coins}}</td>
               <td>
-                <a href="{{ url('/admin/view/user_profile/'.$data->username) }}" class="btn btn-primary" role="button">View</a>
+                <a href="{{ url('/admin/view/profile/'.$data->username) }}" class="btn btn-primary" role="button">View Profile</a>
               </td>
             </tr>
             @endforeach
