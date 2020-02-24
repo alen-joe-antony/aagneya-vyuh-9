@@ -14,6 +14,8 @@ use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\DB;
 
+use App\User;
+
 
 class GameController extends Controller
 {
@@ -156,8 +158,30 @@ class GameController extends Controller
     }
 
     function leaderboard() {
-        $entry = DB::table('user_levels')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
-        return view('leaderboard', ['entry' => $entry]);
+        $user_type =  User::where('username', Auth::user()->username)->first()->user_type;
+        if($user_type == 'player') {
+            $entry = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('player')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+            return view('leaderboard', ['entry' => $entry]);
+        }
+        elseif($user_type == 'tester') {
+            $entry = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('tester')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+            return view('leaderboard', ['entry' => $entry]);
+        }
+        elseif($user_type == 'admin') {
+            $entry = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('player')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+
+            $entry1 = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('tester')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+
+            return view('leaderboard', ['admin' => True, 'entry' => $entry, 'entry1' => $entry1]);
+        }
     }
 
     function getCoins() {
