@@ -27,6 +27,7 @@ Route::get('/game/question', 'GameController@getQuestion');
 Route::post('/game/submitAnswer', 'GameController@submitAnswer');
 Route::get('/game/leaderboard', 'GameController@leaderboard');
 Route::post('/game/coins', 'GameController@getCoins');
+Route::get('/game/profile', 'GameController@viewProfile');
 
 Route::get('/admin', 'AdminController@index');
 Route::get('/admin/view/profile/{username}', 'AdminController@viewProfile');

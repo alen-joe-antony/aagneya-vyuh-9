@@ -187,5 +187,13 @@ class GameController extends Controller
     function getCoins() {
         $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
         return $coins;
-      }
+    }
+
+    function viewProfile() {
+        $user_entry = DB::table('users')->where('username', Auth::user()->username)->first();
+        $user_level_entry = DB::table('user_levels')->where('username', Auth::user()->username)->first();
+        $solved_question_entry = DB::table('solved_question_stats')->where('username', Auth::user()->username)->get();
+        $attempted_answers = DB::table('attempted_answers')->where('username', Auth::user()->username)->get();
+        return view('profile', ['user_entry' => $user_entry, 'user_level_entry' => $user_level_entry, 'solved_question_entry' => $solved_question_entry, 'attempted_answers' => $attempted_answers]);
+    }
 }

@@ -25,16 +25,21 @@
         <h4>Name: {{ $user_entry->name }}</h4>
         <h4>Username: {{ $user_entry->username }}</h4>
         <h4>Email: {{ $user_entry->email }}</h4>
+        @isset($admin)
         <h4>Login Provider: {{ $user_entry->provider }}</h4>
+        @endisset
         <img src="{{ url($user_entry->profile_pic_url) }}">
         <h4>Institution: {{ $user_entry->institution }}</h4>
         <h4>User Type: {{ $user_entry->user_type}}</h4>
         <h4>Account Status: {{ $user_entry->status }}</h4>
+        @isset($admin)
         <h4>Account Created At: {{ $user_entry->created_at }}</h4>
         <h4>Account Updated At: {{ $user_entry->updated_at }}</h4>
+        @endisset
         <h4>Levels Cleared: {{ $user_level_entry->current_level - 1 }}</h4>
         <h4>Coins: {{ $user_level_entry->coins }}</h4>
 
+        @isset($admin)
         <button class="btn btn-primary" id="stats_table_toggle_btn">
             View Question Solving Stats of
             <span class="badge badge-light">{{ $user_entry->name }}</span>
@@ -113,7 +118,7 @@
           <a href="{{ url('/admin/actions/block_user/'.$user_entry->username) }}" class="btn btn-success" role="button">Activate User</a>
           @endif
           <br>
-
+        @endisset
     </body>
     <script>
         document.getElementById('stats').style.display='none';
