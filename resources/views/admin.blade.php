@@ -4,11 +4,33 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+        <style>
+            /* Chrome, Safari, Edge, Opera */
+            input::-webkit-outer-spin-button,
+            input::-webkit-inner-spin-button {
+              -webkit-appearance: none;
+              margin: 0;
+            }
+
+            /* Firefox */
+            input[type=number] {
+              -moz-appearance:textfield;
+            }
+            </style>
     </head>
     <body>
         <h1>ADMIN PAGE</h1>
         <br>
-        <a href="{{ url('/admin/action/coins_giveaway/all') }}" class="btn btn-warning btn-lg" role="button">Giveaway Coins to all Users</a>
+        <form class="form-inline" method="post" action="{{ url('/admin/actions/coins_giveaway_all') }}">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <label for="num_coins">Enter coins to giveaway to all users</label>
+                <input type="number" class="form-control" id="num_coins" placeholder="number" name="num_coins">
+              </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <br>
         <a href="{{ url('/admin/view/logs') }}" class="btn btn-primary btn-lg" role="button">View Logs</a>
         <br>
         <br>

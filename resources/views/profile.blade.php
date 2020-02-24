@@ -86,7 +86,8 @@
         </table>
         <br>
         <br>
-        <form class="form-inline" method="post" action="{{ url('/admin/action/change_user_type/'.$user_entry->username) }}">
+        <form class="form-inline" method="post" action="{{ url('/admin/actions/change_user_type/'.$user_entry->username) }}">
+            {{ csrf_field() }}
             <div class="form-group">
                 <label for="user_type">Choose user type:</label>
                 <select id="user_type" name="user_type" class="form-control">
@@ -97,14 +98,20 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-          <form class="form-inline" method="post" action="{{ url('/admin/action/coins_giveaway/'.$user_entry->username) }}">
+          <form class="form-inline" method="post" action="{{ url('/admin/actions/coins_giveaway/'.$user_entry->username) }}">
+            {{ csrf_field() }}
             <div class="form-group">
                 <label for="num_coins">Enter coins to giveaway</label>
-                <input type="number" class="form-control" id="num_coins" placeholder="number"  min="0">
+                <input type="number" class="form-control" id="num_coins" placeholder="number" name="num_coins">
               </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
-          <a href="{{ url('/admin/action/block_user/'.$user_entry->username) }}" class="btn btn-danger" role="button">Block User</a>
+
+          @if ($user_entry->status == "active")
+          <a href="{{ url('/admin/actions/block_user/'.$user_entry->username) }}" class="btn btn-danger" role="button">Block User</a>
+          @elseif ($user_entry->status == "blocked")
+          <a href="{{ url('/admin/actions/block_user/'.$user_entry->username) }}" class="btn btn-success" role="button">Activate User</a>
+          @endif
           <br>
 
     </body>
