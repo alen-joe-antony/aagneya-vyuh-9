@@ -73,14 +73,14 @@
               <th>Mode</th>
               <th>Proxymeter State</th>
             </tr>
-            @foreach($solved_question_entry as $key => $data)
+            @foreach($attempted_answers as $key => $data)
             <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{$key + 1}}</td>
+              <td>{{$data->level}}</td>
+              <td>{{$data->attempt}}</td>
+              <td>{{$data->timestamp}}</td>
+              <td>{{$data->mode}}</td>
+              <td>{{$data->proxymeter_state}}</td>
             </tr>
             @endforeach
         </table>

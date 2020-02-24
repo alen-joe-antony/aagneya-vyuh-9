@@ -28,7 +28,8 @@ class AdminController extends Controller
         $user_entry = DB::table('users')->where('username', $username)->first();
         $user_level_entry = DB::table('user_levels')->where('username', $username)->first();
         $solved_question_entry = DB::table('solved_question_stats')->where('username', $username)->get();
-        return view('profile', ['admin' => True, 'user_entry' => $user_entry, 'user_level_entry' => $user_level_entry, 'solved_question_entry' => $solved_question_entry]);
+        $attempted_answers = DB::table('attempted_answers')->where('username', $username)->get();
+        return view('profile', ['admin' => True, 'user_entry' => $user_entry, 'user_level_entry' => $user_level_entry, 'solved_question_entry' => $solved_question_entry, 'attempted_answers' => $attempted_answers]);
     }
 
     function coinsGiveaway($username, Request $request) {
