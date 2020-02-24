@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AttemptedAnswer;
 use App\Question;
 use App\SolvedQuestionStat;
 use App\UserLevel;
@@ -12,6 +13,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Str;
 
 use Illuminate\Support\Facades\DB;
+
+use App\User;
 
 
 class GameController extends Controller
@@ -66,6 +69,15 @@ class GameController extends Controller
         $given_answer = $request->get('answer');
         $given_answer = Str::upper($given_answer);
 
+        // Attempts Log
+
+        $attempts = new AttemptedAnswer;
+        $attempts->username = Auth::user()->username;
+        $attempts->level = $level;
+        $attempts->attempt = $given_answer;
+        $attempts->mode = "submit";
+        $attempts->save();
+
         if($correct_answer == $given_answer) {
             UserLevel::where('username', Auth::user()->username)->update(array('current_level'=> $level + 1));
             UserLevel::where('username', Auth::user()->username)->update(array('question_revealed'=> 0));
@@ -80,6 +92,7 @@ class GameController extends Controller
             $solved_question->finish_time = $finish_time;
             $solved_question->time_taken = $time_taken;
             $solved_question->save();
+
 
             UserLevel::where('username', Auth::user()->username)->update(array('last_update_time' => $finish_time));
 
@@ -102,16 +115,31 @@ class GameController extends Controller
 
     function proxymeter(Request $request) {
         $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
+        $answer = $request->get('answer');
+        $answer = Str::upper($answer);
 
-        if($coins != 0) {
+        $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
+
+         // Attempts Log
+
+         $attempts = new AttemptedAnswer;
+         $attempts->username = Auth::user()->username;
+         $attempts->level = $level;
+         $attempts->attempt = $answer;
+         $attempts->mode = "proxymeter";
+         if($coins > 0) {
+            $attempts->proxymeter_state = "enabled";
+         }
+         else {
+            $attempts->proxymeter_state = "disabled";
+         }
+         $attempts->save();
+
+        if($coins > 0) {
             $this->validate($request, [
                 'answer'   => 'required|regex:/^[\w\\s]+$/',
             ]);
 
-            $answer = $request->get('answer');
-            $answer = Str::upper($answer);
-
-            $level = UserLevel::findOrFail(Auth::user()->username)->current_level;
             $samples = Config::get('proxymeter.levels.'.$level);
             $proximity = array_search($answer, $samples);
 
@@ -130,12 +158,42 @@ class GameController extends Controller
     }
 
     function leaderboard() {
-        $entry = DB::table('user_levels')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
-        return view('leaderboard', ['entry' => $entry]);
+        $user_type =  User::where('username', Auth::user()->username)->first()->user_type;
+        if($user_type == 'player') {
+            $entry = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('player')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+            return view('leaderboard', ['entry' => $entry]);
+        }
+        elseif($user_type == 'tester') {
+            $entry = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('tester')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+            return view('leaderboard', ['entry' => $entry]);
+        }
+        elseif($user_type == 'admin') {
+            $entry = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('player')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+
+            $entry1 = DB::table('users')
+            ->join('user_levels', 'users.username', '=', 'user_levels.username')
+            ->whereUserType('tester')->orderBy('user_levels.current_level', 'DESC')->orderBy('user_levels.last_update_time', 'ASC')->get();
+
+            return view('leaderboard', ['admin' => True, 'entry' => $entry, 'entry1' => $entry1]);
+        }
     }
 
     function getCoins() {
         $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
         return $coins;
-      }
+    }
+
+    function viewProfile() {
+        $user_entry = DB::table('users')->where('username', Auth::user()->username)->first();
+        $user_level_entry = DB::table('user_levels')->where('username', Auth::user()->username)->first();
+        $solved_question_entry = DB::table('solved_question_stats')->where('username', Auth::user()->username)->get();
+        $attempted_answers = DB::table('attempted_answers')->where('username', Auth::user()->username)->get();
+        return view('profile', ['user_entry' => $user_entry, 'user_level_entry' => $user_level_entry, 'solved_question_entry' => $solved_question_entry, 'attempted_answers' => $attempted_answers]);
+    }
 }

@@ -15,6 +15,7 @@
  </head>
  <body>
     <a href="{{ url('/game/leaderboard') }}">leaderboard</a>
+    <a href="{{ url('/game/profile') }}">profile</a>
 
     <h3 id='coins_val'></h3>
     <script>
