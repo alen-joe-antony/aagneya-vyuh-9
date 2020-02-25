@@ -29,7 +29,7 @@ class SocialLoginController extends Controller
       auth()->login($user);
       if($user->username == Null) // or $user->home_participant == Null or $user->institution == Null
       {
-          return view('register')->with('provider', $provider)->with('id', $getInfo->id);
+          return view('register')->with('provider', $provider)->with('id', $getInfo->id)->with('name', $getInfo->name);
       }
       return redirect('game');
     }
@@ -53,16 +53,18 @@ class SocialLoginController extends Controller
 
     function registerUser(Request $request) {
         $v = Validator::make($request->all(), [
+            'name'          => 'required|regex:/^[a-zA-Z\s]*$/',
             'username'      => 'unique:users|required|min:3|regex:/^[\w\\s]+$/',
             'institution'   => 'required|regex:/^[\w\\s]+$/'
         ]);
 
         if ($v->fails())
         {
-            return view('register')->withErrors($v->errors())->with('provider', $request->provider)->with('id', $request->id);
+            return view('register')->withErrors($v->errors())->with('provider', $request->provider)->with('id', $request->id)->with('name', $request->name);
         }
         $user = User::where('provider_id', $request->id)->first();
         $user->update([
+            'name'              => $request->name,
             'username'          => $request->username,
             'home_participant'  => $request->home_participant,
             'institution'       => $request->institution

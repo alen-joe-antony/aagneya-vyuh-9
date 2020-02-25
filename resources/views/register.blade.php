@@ -49,6 +49,13 @@
                 </div>
 
                 <div class="form-group">
+                    <label>Enter Name</label>
+                    <br>
+                    <label>This name will be printed on the certificate issued</label>
+                    <input type="text" name="name" class="form-control" value="{{$name}}" />
+                </div>
+
+                <div class="form-group">
                     <label>Enter Username</label>
                     <input type="text" name="username" class="form-control" />
                 </div>
