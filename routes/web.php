@@ -35,6 +35,7 @@ Route::group(['middleware' => ['App\Http\Middleware\CheckLoginMiddleware', 'App\
 Route::group(['middleware' => ['App\Http\Middleware\CheckLoginMiddleware', 'App\Http\Middleware\ActiveUserMiddleware', 'App\Http\Middleware\AdminMiddleware']], function () {
     Route::get('/admin', 'AdminController@index');
     Route::get('/admin/view/profile/{username}', 'AdminController@viewProfile');
+    Route::get('/admin/view/logs', 'LogsController@index');
     Route::post('/admin/actions/coins_giveaway/{username}', 'AdminController@coinsGiveaway');
     Route::post('/admin/actions/change_user_type/{username}', 'AdminController@changeUserType');
     Route::get('/admin/actions/block_user/{username}', 'AdminController@blockUser');

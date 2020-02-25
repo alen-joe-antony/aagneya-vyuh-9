@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 class AdminController extends Controller
 {
     function index() {
-        $user_type = User::where('username', Auth::user()->username)->first()->user_type;
         $entry = DB::table('users')
             ->join('user_levels', 'users.username', '=', 'user_levels.username')
             ->select('users.name', 'users.username', 'users.user_type', 'users.status', 'user_levels.current_level', 'user_levels.coins')
@@ -32,6 +31,7 @@ class AdminController extends Controller
         $coins = $user_level->coins;
         $coins_inc = $request->get('num_coins');
         $user_level->update(array('coins' => $coins + $coins_inc));
+        LogsController::logData('Coins Giveaway', 'Giveaway '.$coins_inc.' coins to '.$username);
         return back();
     }
 
@@ -43,6 +43,7 @@ class AdminController extends Controller
             $row->coins = $coins + $coins_inc;
             $row->save();
         }
+        LogsController::logData('Coins Giveaway All', 'Giveaway '.$coins_inc.' coins to all players');
         return back();
     }
 
@@ -50,6 +51,7 @@ class AdminController extends Controller
         if($username != Auth::user()->username) {
             $user_type = $request->get('user_type');
             User::where('username', $username)->first()->update(array('user_type' => $user_type));
+            LogsController::logData('Change User Type', 'Chnaged user type of '.$username.' to '.$user_type);
             return back();
         }
         else {
@@ -61,9 +63,11 @@ class AdminController extends Controller
         $status = User::where('username', $username)->first()->status;
         if ($status == "active") {
             User::where('username', $username)->first()->update(array('status' => 'blocked'));
+            LogsController::logData('Block User Account', 'Blocked user account of '.$username);
         }
         elseif ($status == "blocked") {
             User::where('username', $username)->first()->update(array('status' => 'active'));
+            LogsController::logData('Activate User Account', 'Activated user account of '.$username);
         }
         return back();
     }
