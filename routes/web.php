@@ -13,10 +13,12 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', 'SocialLoginController@index');
-Route::get('/login', 'SocialLoginController@index');
-Route::get('/auth/redirect/{provider}', 'SocialLoginController@auth_redirect');
-Route::get('/auth/callback/{provider}', 'SocialLoginController@auth_callback');
+Route::group(['middleware' => 'App\Http\Middleware\CheckLoginStatusMiddleware'], function () {
+    Route::get('/', 'SocialLoginController@index');
+    Route::get('/login', 'SocialLoginController@index');
+    Route::get('/auth/redirect/{provider}', 'SocialLoginController@auth_redirect');
+    Route::get('/auth/callback/{provider}', 'SocialLoginController@auth_callback');
+});
 
 Route::group(['middleware' => 'App\Http\Middleware\CheckLoginMiddleware'], function () {
     Route::post('/auth/register', 'SocialLoginController@registerUser');
