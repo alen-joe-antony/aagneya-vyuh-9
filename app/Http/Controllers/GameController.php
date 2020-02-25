@@ -41,7 +41,7 @@ class GameController extends Controller
         $solved_question->username = Auth::user()->username;
         $solved_question->question_no = $level;
         $solved_question->save();
-
+        LogsController::logData('Reveal Question', 'Question #'.$level.' revealed by user');
         return back();
     }
 
@@ -77,6 +77,8 @@ class GameController extends Controller
         $attempts->attempt = $given_answer;
         $attempts->mode = "submit";
         $attempts->save();
+
+        LogsController::logData('Submit Answer', $given_answer.' as answer to question #'.$level);
 
         if($correct_answer == $given_answer) {
             UserLevel::where('username', Auth::user()->username)->update(array('current_level'=> $level + 1));
@@ -127,6 +129,9 @@ class GameController extends Controller
          $attempts->level = $level;
          $attempts->attempt = $answer;
          $attempts->mode = "proxymeter";
+
+         LogsController::logData('Proxymeter', $answer.' as proxymeter input to question #'.$level);
+
          if($coins > 0) {
             $attempts->proxymeter_state = "enabled";
          }

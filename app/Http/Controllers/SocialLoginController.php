@@ -27,10 +27,11 @@ class SocialLoginController extends Controller
       $getInfo = Socialite::driver($provider)->user();
       $user = $this->createUser($getInfo,$provider);
       auth()->login($user);
-      if($user->username == Null) // or $user->home_participant == Null or $user->institution == Null
+      if($user->username == Null)
       {
           return view('register')->with('provider', $provider)->with('id', $getInfo->id)->with('name', $getInfo->name);
       }
+      LogsController::logData('Login', 'User Logged in to the game');
       return redirect('game');
     }
 
@@ -47,6 +48,7 @@ class SocialLoginController extends Controller
                 'provider_id'       => $getInfo->id,
                 'profile_pic_url'   => 'images/profile-pics/' . $getInfo->getId() . ".jpg",
             ]);
+            LogsController::logData('Sign Up', 'User signed up for the game for the first time');
         }
         return $user;
     }
@@ -72,12 +74,14 @@ class SocialLoginController extends Controller
         UserLevel::create([
             'username'          => $request->username
         ]);
+        LogsController::logData('Register', 'User registered');
         return redirect('game');
     }
 
     function logout()
     {
      Auth::logout();
+     LogsController::logData('Logout', 'User logged out of the game');
      return redirect('login');
     }
 }
