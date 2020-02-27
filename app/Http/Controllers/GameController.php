@@ -146,7 +146,13 @@ class GameController extends Controller
             ]);
 
             $samples = Config::get('proxymeter.levels.'.$level);
-            $proximity = array_search($answer, $samples);
+            $index = array_search($answer, $samples);
+            if($index == Null) {
+                $index = 0;
+            }
+
+            $count = count($samples);
+            $proximity = 100 - ($index / $count)*100;
 
             $solved_question = SolvedQuestionStat::whereUsernameAndQuestionNo(Auth::user()->username, $level)->first();
             $attempts = $solved_question->attempts;

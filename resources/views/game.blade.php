@@ -96,7 +96,7 @@
    <a href="{{ url('/game/question') }}">Reveal Question</a>
    @endif
    @isset($proximity['proximity'])
-   <h4>PROXIMITY : {{ $proximity['proximity'] ?? '' }}</h4>
+   <h4>PROXIMITY : {{ $proximity['proximity'] ?? '' }} %</h4>
    @endisset
    @isset($proximity['proximity_error'])
    <h4>ERROR : Out of Coins</h4>
