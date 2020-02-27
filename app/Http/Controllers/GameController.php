@@ -21,8 +21,11 @@ class GameController extends Controller
 {
     function index($mode = 0) {
         $question_revealed = UserLevel::findOrFail(Auth::user()->username)->question_revealed;
+        $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;
+        if($current_level == 4) {
+            return view('end');
+        }
         if ($question_revealed == 1) {
-            $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;
             $img_url = Question::findOrFail($current_level)->question_img_url;
             if($mode) {
                 return $img_url;
@@ -81,8 +84,10 @@ class GameController extends Controller
         LogsController::logData('Submit Answer', $given_answer.' as answer to question #'.$level);
 
         if($correct_answer == $given_answer) {
-            UserLevel::where('username', Auth::user()->username)->update(array('current_level'=> $level + 1));
-            UserLevel::where('username', Auth::user()->username)->update(array('question_revealed'=> 0));
+            if($level < 4) {
+                UserLevel::where('username', Auth::user()->username)->update(array('current_level'=> $level + 1));
+                UserLevel::where('username', Auth::user()->username)->update(array('question_revealed'=> 0));
+            }
 
             $solved_question = SolvedQuestionStat::whereUsernameAndQuestionNo(Auth::user()->username, $level)->first();
             $attempts = $solved_question->attempts;
