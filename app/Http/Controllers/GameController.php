@@ -28,6 +28,10 @@ class GameController extends Controller
 
     }
 
+    function rules() {
+        return view('rules');
+    }
+
     function index($mode = 0) {
         $question_revealed = UserLevel::findOrFail(Auth::user()->username)->question_revealed;
         $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;

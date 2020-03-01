@@ -85,7 +85,7 @@
 
                                <div class="text">
                                    <ul>
-                                       <li><a href="#" target="_blank">Read the rules</a></li>
+                                       <li><a href="{{ url('/game/rules') }}" target="_blank">Read the rules</a></li>
 
                                        <li>You need clues huh?</li>
                                        <li>Guess it's not all easy</li>
