@@ -1,0 +1,129 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  padding: 0;
+  margin: 0;
+  background: rgba(190, 18, 18, 0.774);
+}
+
+#blocked {
+  position: relative;
+  height: 100vh;
+}
+
+#blocked .blocked {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+.blocked {
+  max-width: 520px;
+  width: 100%;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.blocked .blockedin {
+  position: relative;
+  height: 240px;
+}
+
+.blocked .blockedin h1 {
+  font-family: 'Montserrat', sans-serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 150px;
+  font-weight: 900;
+  margin: 0px;
+  color: #eee;
+  text-transform: uppercase;
+  letter-spacing: -15px;
+  margin-left: -20px;
+  margin-top: 0px;
+}
+
+.blocked .blockedin h1>span {
+  text-shadow: -8px 0px 0px #222;
+}
+
+.blocked .blockedin h3 {
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  font-size: 16px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #eee;
+  margin: 0;
+  letter-spacing: 3px;
+  padding-left: 6px;
+}
+
+
+.blocked h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  text-transform: uppercase;
+  color: #eee;
+  margin-top: 0px;
+  margin-bottom: 25px;
+}
+
+
+a {
+  text-transform: uppercase;
+  list-style: none;
+  color: #eee;
+  text-decoration: none;
+  padding: 10px 15px;
+  border: 1px solid #eee;
+  border-radius: 20px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 18px;
+}
+
+a:hover {
+  background: white;
+  color: black;
+  transition: 0.4s ease;
+}
+
+@media only screen and (max-width: 767px) {
+  .blocked .blockedin {
+    height: 200px;
+  }
+  .blocked .blockedin h1 {
+    font-size: 200px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .blocked .blockedin {
+    height: 160px;
+  }
+  .blocked .blockedin h1 {
+    font-size: 160px;
+    height: 150px;
+    line-height: 160px;
+  }
+  .blocked h2 {
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 35px;
+  }
+
+  a {
+    font-size: 16px;
+  }
+}

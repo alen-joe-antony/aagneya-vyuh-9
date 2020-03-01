@@ -17,7 +17,7 @@ class ActiveUserMiddleware
     public function handle($request, Closure $next)
     {
         if($request->user() && $request->user()->status != 'active') {
-            return new Response(view('blocked'));
+            return new Response(view('errors/blocked'));
         }
         return $next($request);
     }
