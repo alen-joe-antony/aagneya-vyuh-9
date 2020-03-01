@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\File;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use App\UserLevel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -14,7 +15,14 @@ class SocialLoginController extends Controller
 {
     function index()
     {
-     return view('login');
+        $time = env('GAME_START_TIME');
+        $fixed_time = Carbon::parse($time);
+        if(Carbon::now('IST') >= $fixed_time) {
+            return view('login');
+        }
+        else {
+            return view('countdown')->with('fixed_time', $fixed_time);
+        }
     }
 
     function auth_redirect($provider)
