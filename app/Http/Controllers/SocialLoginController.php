@@ -15,14 +15,7 @@ class SocialLoginController extends Controller
 {
     function index()
     {
-        $time = env('GAME_START_TIME');
-        $fixed_time = Carbon::parse($time);
-        if(Carbon::now('IST') >= $fixed_time) {
-            return view('login');
-        }
-        else {
-            return view('countdown')->with('fixed_time', $fixed_time);
-        }
+        return view('login');
     }
 
     function auth_redirect($provider)
