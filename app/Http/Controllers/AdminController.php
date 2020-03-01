@@ -55,7 +55,7 @@ class AdminController extends Controller
             return back();
         }
         else {
-            return "<h1>Cannot change user type associated with the current admin account <br> Login as another admin and try again </h1>";
+            return view('errors.change_user_type');
         }
     }
 
