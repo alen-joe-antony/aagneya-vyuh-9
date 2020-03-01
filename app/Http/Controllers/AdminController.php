@@ -60,14 +60,19 @@ class AdminController extends Controller
     }
 
     function blockUser($username) {
-        $status = User::where('username', $username)->first()->status;
-        if ($status == "active") {
-            User::where('username', $username)->first()->update(array('status' => 'blocked'));
-            LogsController::logData('Block User Account', 'Blocked user account of '.$username);
+        if($username != Auth::user()->username) {
+            $status = User::where('username', $username)->first()->status;
+            if ($status == "active") {
+                User::where('username', $username)->first()->update(array('status' => 'blocked'));
+                LogsController::logData('Block User Account', 'Blocked user account of '.$username);
+            }
+            elseif ($status == "blocked") {
+                User::where('username', $username)->first()->update(array('status' => 'active'));
+                LogsController::logData('Activate User Account', 'Activated user account of '.$username);
+            }
         }
-        elseif ($status == "blocked") {
-            User::where('username', $username)->first()->update(array('status' => 'active'));
-            LogsController::logData('Activate User Account', 'Activated user account of '.$username);
+        else {
+            return "<h1>Cannot block current user <br> Login as another admin and try again </h1>";
         }
         return back();
     }
