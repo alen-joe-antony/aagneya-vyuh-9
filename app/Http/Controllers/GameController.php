@@ -19,6 +19,15 @@ use App\User;
 
 class GameController extends Controller
 {
+    function dashboard() {
+        $username = Auth::user()->username;
+        $current_level = UserLevel::findOrFail($username)->current_level;
+        $coins = UserLevel::findOrFail($username)->coins;
+
+        return view('dashboard')->with('username', $username)->with('levels', $current_level-1)->with('coins', $coins);
+
+    }
+
     function index($mode = 0) {
         $question_revealed = UserLevel::findOrFail(Auth::user()->username)->question_revealed;
         $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;

@@ -40,7 +40,7 @@ class SocialLoginController extends Controller
           return view('register')->with('provider', $provider)->with('id', $getInfo->id)->with('name', $getInfo->name);
       }
       LogsController::logData('Login', 'User Logged in to the game');
-      return redirect('game');
+      return redirect('dashboard');
     }
 
     function createUser($getInfo,$provider)
@@ -83,7 +83,7 @@ class SocialLoginController extends Controller
             'username'          => $request->username
         ]);
         LogsController::logData('Register', 'User registered');
-        return redirect('game');
+        return redirect('dashboard');
     }
 
     function logout()

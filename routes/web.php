@@ -26,6 +26,7 @@ Route::group(['middleware' => 'App\Http\Middleware\CheckLoginMiddleware'], funct
 });
 
 Route::group(['middleware' => ['App\Http\Middleware\CheckLoginMiddleware', 'App\Http\Middleware\ActiveUserMiddleware']], function() {
+    Route::get('/dashboard', 'GameController@dashboard');
     Route::get('/game', 'GameController@index');
     Route::get('/game/question', 'GameController@getQuestion');
     Route::post('/game/submitAnswer', 'GameController@submitAnswer');
