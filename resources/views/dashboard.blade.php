@@ -34,7 +34,7 @@
                                    <ul>
                                        {{-- <li>Your Vyuh Rank is <span class="rank">21</span></li> --}}
                                        <li><span class="coins">{{ $coins }}</span> coins remaining</li>
-                                       {{-- <li>Accuracy is <span class="accuracy">56%</span></li> --}}
+                                       <li>Accuracy is <span class="accuracy">{{ $accuracy }}%</span></li>
                                        <li><span class="levels">{{ $levels }}</span> levels completed</li>
                                        <li><span class="levels">{{ 30 - $levels }}</span> levels remaining</li>
                                    </ul>
