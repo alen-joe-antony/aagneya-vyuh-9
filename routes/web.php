@@ -33,6 +33,7 @@ Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\
     Route::get('/game/leaderboard', 'GameController@leaderboard');
     Route::post('/game/coins', 'GameController@getCoins');
     // Route::get('/game/profile', 'GameController@viewProfile');
+    Route::get('/dashboard', 'GameController@dashboard');
 });
 
 Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\Http\Middleware\CheckLoginMiddleware', 'App\Http\Middleware\ActiveUserMiddleware', 'App\Http\Middleware\AdminMiddleware']], function () {

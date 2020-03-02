@@ -34,10 +34,13 @@ class GameController extends Controller
     }
 
     function index($mode = 0) {
-        GameController::getQuestion();
+        $question_revealed_pre = UserLevel::findOrFail(Auth::user()->username)->question_revealed;
+        if(!$question_revealed_pre) {
+            GameController::getQuestion();
+        }
         $question_revealed = UserLevel::findOrFail(Auth::user()->username)->question_revealed;
         $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;
-        if($current_level == 4) {
+        if($current_level == env('NUM_LEVELS')) {
             return view('end');
         }
         if ($question_revealed == 1) {
