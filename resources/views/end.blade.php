@@ -22,7 +22,7 @@
 	<script type="text/javascript" src="{{ URL::to('js/end/typed.js') }}"></script>
 	<script type="text/javascript">
 		var typed = new Typed('.element', {
-  				strings: ["thanks for playing", "vyuh 2019"],
+  				strings: ["thanks for playing", "vyuh 2020"],
   				typeSpeed: 50,
   				backSpeed: 50,
   				loop: true
