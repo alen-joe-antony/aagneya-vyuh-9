@@ -57,7 +57,7 @@ class SocialLoginController extends Controller
     function registerUser(Request $request) {
         $v = Validator::make($request->all(), [
             'name'          => 'required|regex:/^[a-zA-Z\s]*$/',
-            'username'      => 'unique:users|required|min:3|regex:/^[\w\\s]+$/',
+            'username'      => 'unique:users|required|min:3|alpha_num',
             'institution'   => 'required|regex:/^[\w\\s]+$/'
         ]);
 
