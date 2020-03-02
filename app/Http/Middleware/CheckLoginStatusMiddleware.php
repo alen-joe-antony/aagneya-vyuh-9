@@ -18,7 +18,7 @@ class CheckLoginStatusMiddleware
     {
         {
             if(Auth::check()) {
-                return redirect('/game');
+                return redirect('/dashboard');
             }
             return $next($request);
         }

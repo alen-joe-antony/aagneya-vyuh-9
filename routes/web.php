@@ -27,6 +27,7 @@ Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\
 
 Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\Http\Middleware\CheckLoginMiddleware', 'App\Http\Middleware\ActiveUserMiddleware']], function() {
     Route::get('/game', 'GameController@index');
+    Route::get('/game/rules', 'GameController@rules');
     Route::get('/game/question', 'GameController@getQuestion');
     Route::post('/game/submitAnswer', 'GameController@submitAnswer');
     Route::get('/game/leaderboard', 'GameController@leaderboard');

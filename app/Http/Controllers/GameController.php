@@ -19,7 +19,22 @@ use App\User;
 
 class GameController extends Controller
 {
+    function dashboard() {
+        $username = Auth::user()->username;
+        $current_level = UserLevel::findOrFail($username)->current_level;
+        $coins = UserLevel::findOrFail($username)->coins;
+        $num_attempts = AttemptedAnswer::where('username', $username)->count();
+        $accuracy = (($current_level -1)/$num_attempts)*100;
+        $accuracy = number_format((float)$accuracy, 2, '.', '');
+        return view('dashboard')->with('username', $username)->with('levels', $current_level-1)->with('coins', $coins)->with('accuracy', $accuracy);
+    }
+
+    function rules() {
+        return view('rules');
+    }
+
     function index($mode = 0) {
+        GameController::getQuestion();
         $question_revealed = UserLevel::findOrFail(Auth::user()->username)->question_revealed;
         $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;
         if($current_level == 4) {
