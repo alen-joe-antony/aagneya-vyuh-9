@@ -13,28 +13,32 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\Http\Middleware\CheckLoginStatusMiddleware']], function () {
+Route::group(['middleware' => 'App\Http\Middleware\CheckLoginStatusMiddleware'], function () {
     Route::get('/', 'SocialLoginController@index');
     Route::get('/login', 'SocialLoginController@index');
     Route::get('/auth/redirect/{provider}', 'SocialLoginController@auth_redirect');
     Route::get('/auth/callback/{provider}', 'SocialLoginController@auth_callback');
 });
 
-Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\Http\Middleware\CheckLoginMiddleware']], function () {
+Route::group(['middleware' => 'App\Http\Middleware\CheckLoginMiddleware'], function () {
     Route::post('/auth/register', 'SocialLoginController@registerUser');
     Route::get('/auth/logout', 'SocialLoginController@logout');
 });
 
 Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\Http\Middleware\CheckLoginMiddleware', 'App\Http\Middleware\ActiveUserMiddleware']], function() {
     Route::get('/game', 'GameController@index');
-    Route::get('/game/rules', 'GameController@rules');
     Route::get('/game/question', 'GameController@getQuestion');
     Route::post('/game/submitAnswer', 'GameController@submitAnswer');
-    Route::get('/game/leaderboard', 'GameController@leaderboard');
-    Route::post('/game/coins', 'GameController@getCoins');
+    // Route::post('/game/coins', 'GameController@getCoins');
     // Route::get('/game/profile', 'GameController@viewProfile');
-    Route::get('/dashboard', 'GameController@dashboard');
 });
+
+Route::group(['middleware' => ['App\Http\Middleware\CheckLoginMiddleware', 'App\Http\Middleware\ActiveUserMiddleware']], function() {
+    Route::get('/game/leaderboard', 'GameController@leaderboard');
+    Route::get('/dashboard', 'GameController@dashboard');
+    Route::get('/game/rules', 'GameController@rules');
+});
+
 
 Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\Http\Middleware\CheckLoginMiddleware', 'App\Http\Middleware\ActiveUserMiddleware', 'App\Http\Middleware\AdminMiddleware']], function () {
     Route::get('/admin', 'AdminController@index');
