@@ -22,6 +22,10 @@ class TimeWindowMiddleware
         $fixed_time_start = Carbon::parse($start_time);
         $fixed_time_end = Carbon::parse($end_time);
         $now = Carbon::now('IST');
+        $user_type =  User::where('username', Auth::user()->username)->first()->user_type;
+        if($user_type == 'admin') {
+            return $next($request);
+        }
         if($now >= $fixed_time_start && $now <= $fixed_time_end) {
             return $next($request);
         }
