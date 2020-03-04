@@ -15,7 +15,7 @@
 
 
 	<h1 class="element"></h1>
-	<a class="begin" href="{{ url('/auth/redirect/facebook') }}">Login with Facebook</a>
+	<a class="begin" href="{{ url('/auth/redirect/google') }}">Login with Google</a>
 
 
 
