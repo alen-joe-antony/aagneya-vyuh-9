@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-	<title>Aagneya Vyuh 2019</title>
+	<title>Aagneya Vyuh 2020</title>
 
 	<link rel="icon" type="image/gif" href="logo.png">
 	<link href="https://fonts.googleapis.com/css?family=Fjalla+One" rel="stylesheet">
