@@ -48,7 +48,7 @@ class SocialLoginController extends Controller
                 'provider_id'       => $getInfo->id,
                 'profile_pic_url'   => 'images/profile-pics/' . $getInfo->getId() . ".jpg",
             ]);
-            LogsController::logData('Sign Up', 'User signed up for the game for the first time');
+            // LogsController::logData('Sign Up', 'User signed up for the game for the first time');
         }
         return $user;
     }
@@ -74,7 +74,7 @@ class SocialLoginController extends Controller
         UserLevel::create([
             'username'          => $request->username
         ]);
-        LogsController::logData('Register', 'User registered');
+        //LogsController::logData('Register', 'User registered');
         return redirect('dashboard');
     }
 
