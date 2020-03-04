@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\File;
 use Laravel\Socialite\Facades\Socialite;
 use App\User;
 use App\UserLevel;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
