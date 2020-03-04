@@ -80,8 +80,8 @@ class SocialLoginController extends Controller
 
     function logout()
     {
-     Auth::logout();
      LogsController::logData('Logout', 'User logged out of the game');
+     Auth::logout();
      return redirect('login');
     }
 }
