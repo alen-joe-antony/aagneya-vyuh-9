@@ -23,7 +23,7 @@
   <div class="rule">
     <div class="title">Main Rule</div>
     <div class="body">
-      <p>Neque sunt voluptatibus repellat pariatur ut enim. Eveniet rerum suscipit eveniet amet dignissimos. Doloremque et distinctio quod molestiae ut.</p>
+      <p>The internet is your playground. Do not be limited to Google and Wikipedia! </p>
     </div>
   </div>
 
@@ -31,7 +31,7 @@
   <div class="rule">
     <div class="title">Coin usage</div>
     <div class="body">
-      <p>Quo nobis cumque dolor iure voluptatem voluptatem alias soluta.</p>
+      <p>The ProxiMeter is your ally. Use it to its full potential! An usage costs 10 coins and every question you solve grants you 25. Be wise.</p>
     </div>
   </div>
 
@@ -39,9 +39,9 @@
 
 
     <!-- if you use the class title big, there will be a big circle next to the title on the vertical line instead of the small circle. This can be used to emphasise important rules -->
-    <div class="title big">Proxy Meter</div>
+    <div class="title big">ProxyMeter</div>
     <div class="body">
-      <p>Rerum sit libero possimus amet excepturi. Exercitationem enim dolores sunt praesentium dolorum praesentium.</p>
+      <p>The ProxiMeter is the best way to check if you're getting closer or straying away from your answer. Just enter your answer and give it a go!</p>
     </div>
   </div>
 
@@ -49,16 +49,17 @@
   <div class="rule">
     <div class="title">Answer accuracy</div>
     <div class="body">
-      <p>Voluptatibus veniam ea reprehenderit atque. Reiciendis non laborum adipisci ipsa pariatur omnis. Sed ipsam repudiandae velit. Omnis libero nostrum aperiam nemo dolor ea eos eius. Esse a non itaque quidem.</p>
+	  <p>Enter full Wikipedia names. Punctuations are not allowed. Replace hyphens with spaces and there is no need for fullstops.</p>
+	  <p>Check your accuracy in your dashboard! But remember, Vyuh requires speed more than accuracy!</p>
     </div>
   </div>
 
 
   <div class="rule">
-    <div class="title">Some other rule</div>
+    <div class="title">Some other rules</div>
     <div class="body">
-      <p>VAdipisci totam omnis cum et suscipit excepturi et excepturi. Inventore sequi sit ut aliquid. Modi aut dolores dignissimos.</p>
-      <p>Delectus facere officia consequuntur molestias deserunt illo. Placeat laudantium beatae natus excepturi ab nihil voluptates.</p>
+      <p>Do not team up. It's just you and the ProxiMeter.</p>
+      <p>Any suspicious activity will be noted and action will be taken.</p>
     </div>
   </div>
 
@@ -66,15 +67,16 @@
   <div class="rule">
     <div class="title big">Success rule</div>
     <div class="body">
-      <p>Impedit dolorem commodi explicabo fugit aut alias voluptatem. Magnam earum rerum quae dicta quibusdam aliquam ut.</p>
+      <p>The first player who reaches level 30, wins. Otherwise, the person on the highest ranks of the leaderboard will be chosen as the victors.</p>
+	  <p>The first player who cracks level 17 gets a special prize!</p>
     </div>
   </div>
 
 
   <div class="rule">
-    <div class="title">Rule 7</div>
+    <div class="title">Go Forth and Conquer</div>
     <div class="body">
-      <p>Qui facere eos aut suscipit doloremque quos...</p>
+      <p>That is all Hunters. Go ahead, conquer those 30 levels and claim the title. Good luck! Remember, the Admin sees all. </p>
     </div>
   </div>
 </div>
