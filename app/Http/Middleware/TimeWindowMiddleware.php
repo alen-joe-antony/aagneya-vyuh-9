@@ -5,6 +5,8 @@ namespace App\Http\Middleware;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class TimeWindowMiddleware
 {
