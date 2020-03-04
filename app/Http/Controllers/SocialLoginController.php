@@ -19,12 +19,12 @@ class SocialLoginController extends Controller
 
     function auth_redirect($provider)
     {
-        return Socialite::driver($provider)->stateless()->redirect();
+        return Socialite::driver($provider)->redirect();
     }
 
     function auth_callback($provider)
     {
-      $getInfo = Socialite::driver($provider)->user();
+      $getInfo = Socialite::driver($provider)->stateless()->user();
       $user = $this->createUser($getInfo,$provider);
       auth()->login($user);
       if($user->username == Null)
