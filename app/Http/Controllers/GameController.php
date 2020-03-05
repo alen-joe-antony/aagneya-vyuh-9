@@ -228,10 +228,10 @@ class GameController extends Controller
         }
     }
 
-    // function getCoins() {
-    //     $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
-    //     return $coins;
-    // }
+    function getCoins() {
+        $coins = UserLevel::findOrFail(Auth::user()->username)->coins;
+        return $coins;
+    }
 
     // function viewProfile() {
     //     $user_entry = DB::table('users')->where('username', Auth::user()->username)->first();

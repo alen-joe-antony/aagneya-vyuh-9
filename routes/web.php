@@ -29,7 +29,7 @@ Route::group(['middleware' => ['App\Http\Middleware\TimeWindowMiddleware', 'App\
     Route::get('/game', 'GameController@index');
     Route::get('/game/question', 'GameController@getQuestion');
     Route::post('/game/submitAnswer', 'GameController@submitAnswer');
-    // Route::post('/game/coins', 'GameController@getCoins');
+    Route::post('/game/coins', 'GameController@getCoins');
     // Route::get('/game/profile', 'GameController@viewProfile');
 });
 

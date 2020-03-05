@@ -6,10 +6,36 @@
 	<title>Question Page</title>
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link rel="stylesheet" type="text/css" href="{{ URL::to('css/game/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ URL::to('css/game/style.css') }}">''
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 </head>
 <body>
+    <div class="coins">
+        <h3 id='coins_val'></h3>
+    <script>
+        $(document).ready(function() {
+            var url = "{{URL('game')}}";
+            var txt = 'Coins: ';
+            $.ajax({
+                url: "/game/coins",
+                type: "POST",
+                data:{
+                    _token:'{{ csrf_token() }}'
+                },
+                cache: false,
+                dataType: 'json',
+                success: function(dataResult){
+                    txt += dataResult;
+                    coins_val.innerText = txt;
+                }
+            });
+        });
+    </script>
+    </div>
 
     @isset($proximity['proximity'])
 	<div class="wrapper">
