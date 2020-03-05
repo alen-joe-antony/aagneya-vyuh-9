@@ -111,7 +111,7 @@ class GameController extends Controller
         LogsController::logData('Submit Answer', $given_answer.' as answer to question #'.$level);
 
         if($correct_answer == $given_answer) {
-            if($level < 4) {
+            if($level < env('NUM_LEVELS')) {
                 UserLevel::where('username', Auth::user()->username)->update(array('current_level'=> $level + 1));
                 UserLevel::where('username', Auth::user()->username)->update(array('question_revealed'=> 0));
             }
