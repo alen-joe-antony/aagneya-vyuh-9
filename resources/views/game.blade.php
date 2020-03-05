@@ -6,7 +6,9 @@
 	<title>Question Page</title>
 
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
-    <link rel="stylesheet" type="text/css" href="{{ URL::to('css/game/style.css') }}">''
+    <link rel="stylesheet" type="text/css" href="{{ URL::to('css/game/style.css') }}">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
 </head>
 <body>
