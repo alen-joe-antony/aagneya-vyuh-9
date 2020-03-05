@@ -16,11 +16,15 @@ use Illuminate\Support\Facades\DB;
 
 use App\User;
 
-
 class GameController extends Controller
 {
     function dashboard() {
+        $id = Auth::user()->provider_id;
+        $name = Auth::user()->name;
         $username = Auth::user()->username;
+        if($username == Null) {
+            return view('register')->with('provider', 'google')->with('id', $id)->with('name', $name);
+        }
         $current_level = UserLevel::findOrFail($username)->current_level;
         $coins = UserLevel::findOrFail($username)->coins;
         $num_attempts = AttemptedAnswer::where('username', $username)->count();
