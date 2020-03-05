@@ -192,6 +192,8 @@ class GameController extends Controller
 
             UserLevel::where('username', Auth::user()->username)->update(array('coins' => $coins - 10));
 
+            $proximity = number_format((float)$proximity, 2, '.', '');
+
             return ['proximity' => $proximity];
         }
         else {
