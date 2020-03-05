@@ -10,6 +10,16 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
 
+    <style>
+        .qno {
+            position: absolute;
+            top: 0%;
+            left: 48%;
+            color: aqua;
+            font-size: 40px;
+        }
+    </style>
+
 </head>
 <body>
 
