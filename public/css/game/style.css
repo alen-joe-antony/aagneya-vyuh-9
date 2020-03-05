@@ -113,6 +113,7 @@ img {
 	transform: translate(-50%, -50%);
 	background: #2f3640;
 	height: 40px;
+	width: 380px;
 	border-radius: 40px;
 	padding: 10px;
 }
@@ -125,6 +126,17 @@ img {
 .answerBox:hover > .button {
 	background: white;
 	color: #2f3640;
+}
+
+.answerBoxBtn {
+        position: absolute;
+        top: 95%;
+        left: 62%;
+        transform: translate(-50%, -50%);
+        background: #2f3640;
+        height: 40px;
+        border-radius: 40px;
+        padding: 10px;
 }
 
 .button {

@@ -93,8 +93,11 @@
 
   <form method="post" action="{{ url('/game/submitAnswer') }}">
     {{ csrf_field() }}
-    <div class="answerBox">
-     <input type="text" name="answer" class="text" placeholder="Your Answer"/>
+    <div>
+     <input type="text" name="answer" placeholder="Your Answer" class="answerBox"/>
+</div>
+
+<div class="answerBoxBtn">
      <input type="submit" name="proxymeter" class="button" value="Proxymeter" />
      <input type="submit" name="submit" class="button" value="Submit" />
     </div>
