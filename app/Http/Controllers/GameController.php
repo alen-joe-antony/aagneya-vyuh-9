@@ -57,7 +57,7 @@ class GameController extends Controller
             if($mode) {
                 return $img_url;
             }
-            return view('game')->with('q_img_url', $img_url);
+            return view('game')->with('q_img_url', $img_url)->with('level', $current_level);
         } else {
             return view('game');
         }
@@ -76,13 +76,14 @@ class GameController extends Controller
     }
 
     function submitAnswer(Request $request) {
+        $current_level = UserLevel::findOrFail(Auth::user()->username)->current_level;
         if (isset($_POST['submit'])) {
             $data = GameController::validateAnswer($request);
-            return view('game')->with('data', $data);
+            return view('game')->with('data', $data)->with('level', $current_level);
         } else if (isset($_POST['proxymeter'])) {
             $proximity = GameController::proxymeter($request);
             $img_url = GameController::index($mode = 1);
-            return view('game')->with('q_img_url', $img_url)->with('proximity', $proximity);
+            return view('game')->with('q_img_url', $img_url)->with('proximity', $proximity)->with('level', $current_level);
         }
     }
 

@@ -36,6 +36,10 @@
     </script>
     </div>
 
+    <div class="qno">
+        <h1>{{ $level }}</h1>
+    </div>
+
     @isset($proximity['proximity'])
 	<div class="wrapper">
 		<div class="proxy-wrap">
