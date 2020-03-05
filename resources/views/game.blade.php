@@ -112,8 +112,8 @@
 </div>
 
 <div class="answerBoxBtn">
+    <input type="submit" name="submit" class="button" value="Submit" />
      <input type="submit" name="proxymeter" class="button" value="Proxymeter" />
-     <input type="submit" name="submit" class="button" value="Submit" />
     </div>
     </form>
 
