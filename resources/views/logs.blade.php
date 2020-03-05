@@ -5,6 +5,8 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <link rel="stylesheet" type="text/css" href="{{ URL::to('css/logs/style.css') }}">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     </head>
     <body>
         <h1>Logs</h1>
