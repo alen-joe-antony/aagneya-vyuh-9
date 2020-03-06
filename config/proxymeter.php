@@ -55,7 +55,7 @@ return [
             'MUSIC'
         ],
 		9 => [
-            'NIKOLAI ANDREYEVICH RIMSKI KORSAKOV',
+            'NIKOLAI ANDREYEVICH RIMSKY KORSAKOV',
             'NIKOLAI RIMSKY',
             'FLIGHT OF THE BUMBLEBEE',
             'THE FIVE',
