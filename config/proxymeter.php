@@ -153,10 +153,15 @@ return [
             '1009',
             '1013',
             'RESOLUTION',
-            'PRIME NUMBERS',
-			'PRIME',
 			'FACTORIZATION',
-			'PRIME FACTORIZATION'
+			'PRIME FACTORIZATION',
+            'PRIME NUMBERS',
+			'PRIME NUMBER',
+			'PRIME',
+			'ERATOSTHENES OF CYRENE',
+			'ERATOSTHENES',
+			'CYRENE'
+
         ],
 		18 => [
             'ROLLS ROYCE',
