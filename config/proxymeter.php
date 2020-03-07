@@ -13,7 +13,7 @@ return [
             'CENTROLENIDAE',
             'GLASS FROG',
             'INVISIBLE FROG',
-			'INVISIBLE MAN' 
+			'INVISIBLE MAN'
         ],
         3 => [
             'ONEPLUS',
@@ -55,7 +55,7 @@ return [
             'RADWIMPS',
             'TENKI NO KO',
             'CHILD OF WEATHER',
-			'WEATHERING WITH YOU'
+			'WEATHERING WITH YOU',
             'SOUNDTRACK',
             'MUSIC'
         ],
@@ -210,7 +210,7 @@ return [
 		22 => [
             'ALASTAIR PRESTON REYNOLDS',
 			'ALASTIAR REYNOLDS',
-			'ZIMA BLUE AND OTHER STORIES'
+			'ZIMA BLUE AND OTHER STORIES',
             'ZIMA BLUE',
             'LOVE DEATH AND ROBOTS',
 			'EPISODE 14',
@@ -251,7 +251,7 @@ return [
 			'OMEN 2018',
 			'HP',
             'HP OMEN',
-			'OMEN'
+			'OMEN',
             'DAVE LEE',
 			'TECH REVIEW',
 			'REVIEW',
@@ -298,12 +298,12 @@ return [
 		28 => [
             'ALL THE LIGHT WE CANNOT SEE',
             'WERNER',
-			'TIMO WERNER'
+			'TIMO WERNER',
             'PARIS LOCK MUSEUM',
 			'PARIS MUSUEM',
 			'BOOK',
             'MUSEE DE LA SERRURE',
-			'RB LEIPZG'
+			'RB LEIPZG',
             'BUNDESLIGA'
         ],
 		29 => [
