@@ -225,10 +225,10 @@ return [
             'BOOK'
         ],
 		23 => [
-            'METFORMIN AND DEHYDROEPIANDROSTERONE',
-            'DEHYDROEPIANDROSTERONE AND METFORMIN',
-            'METFORMIN AND DHEA',
-			'METFORMIN',
+            'METAFORMIN AND DEHYDROEPIANDROSTERONE',
+            'DEHYDROEPIANDROSTERONE AND METAFORMIN',
+            'METAFORMIN AND DHEA',
+			'METAFORMIN',
 			'DEHYDROEPIANDROSTERONE',
 			'DHEA',
 			'DIABETES DRUGS',
@@ -308,7 +308,7 @@ return [
 			'PARIS MUSUEM',
 			'BOOK',
             'MUSEE DE LA SERRURE',
-			'RB LEIPZG',
+			'RB LEIPZIG',
             'BUNDESLIGA'
         ],
 		29 => [
@@ -316,6 +316,8 @@ return [
             '432',
             'HERTZ',
 			'FREQUENCY',
+			'UNIVERSE',
+			'UNIVERSE',
             'LIFE THE UNIVERSE AND EVERYTHING',
 			'LIFE UNIVERSE AND EVERYTHING',
 			'LIFE UNIVERSE EVERYTHING',
